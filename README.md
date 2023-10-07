@@ -6,14 +6,19 @@ When it comes to increasing your pricing with Stripe, they don't allow you to ed
 
 This script does it for you automatically. It uses the Stripe API to iterate every customer, and migrate them from one plan to another. It also keeps important things like the quantity & interval the same.
 
-### 1. Add a .env file
+### 1. Install Dependencies
+```sh
+npm install
+```
+
+### 2. Add a .env file
 In the base of the project add a .env file with your STRIPE_SK (can be live or dev key):
 
 ```env
 STRIPE_SK=your_stripe_sk
 ```
 
-### 2. Add config
+### 3. Add config
 
 Add old plan ids (that we'll be migrating from), and new plan ids (migrate to) into the config file.
 
@@ -40,6 +45,11 @@ Add old plan ids (that we'll be migrating from), and new plan ids (migrate to) i
   // change this to false if you want to do a test run as it won't actually update anything
   updateSubscriptions: true,
 }
+```
+
+### 4. Run
+```sh
+npm run dev
 ```
 
 * use at your own risk, would suggest testing with a dev stripe_sk first before trying in live mode.

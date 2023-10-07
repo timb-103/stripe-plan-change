@@ -1,30 +1,26 @@
 import Stripe from 'stripe'
+import config from './config'
 
 // @ts-ignore
 const stripe = new Stripe(process.env.STRIPE_SK, { apiVersion: '2019-11-05' })
 
-// emails of customers to not change
-const ignoreEmails = []
-
-// old price ids if you want to only migrate people from certain plans
-const oldPriceIds = []
-
-// the new prices we'll be going on to
-const prices = {
-  test: {
-    year: '',
-    month: '',
-  },
-  live: {
-    year: '',
-    month: '',
-  },
-}
-
 // simple counters
 let processed = 0
 
+// set config
+const { prices, oldPriceIds, ignoreEmails } = config
+
 export async function changePlans() {
+  if (!process.env.STRIPE_SK) {
+    console.log('No secret key found. Add a .env file with your STRIPE_SK.')
+    return
+  }
+
+  if (!oldPriceIds.length) {
+    console.log('No old price ids found. Add a price ids of the plans you want to change.')
+    return
+  }
+
   // iterate all subscriptions
   for await (const subscription of stripe.subscriptions.list({ limit: 1 })) {
     // get the subsriptions customer object
@@ -61,7 +57,7 @@ async function processPlanChange(subscription: Stripe.Subscription, customer: St
   const quantity = item.quantity
   const mode = subscription.livemode ? 'live' : 'test'
 
-  console.log(`[${mode}] ${email} is on a ${interval} plan with ${quantity} social sets.\n`)
+  console.log(`[${mode}] ${email} is on a ${interval} plan with ${quantity} quantity.\n`)
 
   // create the new item from the existing one
   const newItem: Stripe.SubscriptionUpdateParams.Item = {

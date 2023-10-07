@@ -2,13 +2,17 @@
 
 Iterate all customers and change to a new plan.
 
-Just add your stripe
+### 1. Add a .env file
+In the base of the project add a .env file with your STRIPE_SK (can be live or dev key):
 
-1. Add a .env file in the base of the project with your STRIPE_SK (can be live or dev key):
 ```env
 STRIPE_SK=your_stripe_sk
 ```
-2. Add your old plan ids, and new plan ids into the config file
+
+### 2. Add config
+
+Add old plan ids (that we'll be migrating from), and new plan ids (migrate to) into the config file.
+
 ```js
 {
   // emails of customers to not change  

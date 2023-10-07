@@ -8,7 +8,7 @@ const stripe = new Stripe(process.env.STRIPE_SK, { apiVersion: '2019-11-05' })
 let processed = 0
 
 // set config
-const { prices, oldPriceIds, ignoreEmails } = config
+const { prices, oldPriceIds, ignoreEmails, updateSubscriptions } = config
 
 export async function changePlans() {
   if (!process.env.STRIPE_SK) {
@@ -66,8 +66,12 @@ async function processPlanChange(subscription: Stripe.Subscription, customer: St
     quantity,
   }
 
+  console.log(`[${mode}] ${email} Changing item to:`, newItem)
+
   // update the subscription
-  await stripe.subscriptions.update(subscription.id, { items: [newItem], proration_behavior: 'none' })
+  if (updateSubscriptions) {
+    await stripe.subscriptions.update(subscription.id, { items: [newItem], proration_behavior: 'none' })
+  }
 
   // increase processed counter
   processed += 1

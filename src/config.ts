@@ -3,13 +3,13 @@ const config = {
   ignoreEmails: [],
 
   // old price ids that will be getting changed
-  oldPriceIds: ['price_1NoheeAHwnLX6AVfhmmM94j7'],
+  oldPriceIds: [''],
 
   // the new prices we'll be going on to
   prices: {
     test: {
       year: '',
-      month: 'price_1Nu0a5AHwnLX6AVfy3r0GJoC',
+      month: '',
     },
     live: {
       year: '',

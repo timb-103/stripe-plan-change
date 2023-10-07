@@ -1,0 +1,7 @@
+node_modules
+npm-debug.log
+.env
+.vscode
+.editorconfig
+.prettierrc
+dist

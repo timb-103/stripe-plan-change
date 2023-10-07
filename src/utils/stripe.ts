@@ -1,5 +1,5 @@
 import Stripe from 'stripe'
-import config from './config'
+import config from '../config'
 
 // @ts-ignore
 const stripe = new Stripe(process.env.STRIPE_SK, { apiVersion: '2019-11-05' })

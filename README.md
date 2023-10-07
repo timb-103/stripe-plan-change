@@ -1,6 +1,10 @@
 # stripe-plan-change
 
-Iterate all customers and change to a new plan.
+> Automatically migrate your Stripe customers from one plan to another with the Stripe API.
+
+When it comes to increasing your pricing with Stripe, they doesn't allow you to edit an existing plan if it's already got active subscriptions on it. This means you have to manually go through each customer and move them to a new, higer priced plan - one by one.
+
+This script automates this. It uses the Stripe API to iterate every customer, and migrate them from one plan to another. It also keeps important things like the quantity & interval the same.
 
 ### 1. Add a .env file
 In the base of the project add a .env file with your STRIPE_SK (can be live or dev key):

@@ -1,4 +1,4 @@
-# stripe-plan-change
+# Stripe Plan Change
 
 > Automatically migrate your Stripe customers from one plan to another with the Stripe API.
 
